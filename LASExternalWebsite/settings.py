@@ -40,14 +40,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 3rd party
+    # 3rd party app
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'ckeditor',
     'ckeditor_uploader',
     'debug_toolbar',
+    'compressor',
+    # local app
+    'pages',
 ]
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
