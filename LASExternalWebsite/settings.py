@@ -232,6 +232,3 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_USERNAME_REQUIRED = True
-
-# client id = 612350198237-ak79ru3u38pjgq1fetp6gccbl0m3tq2j.apps.googleusercontent.com
-# client secret = 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
