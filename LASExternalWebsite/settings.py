@@ -18,7 +18,6 @@ import debug_toolbar
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -28,12 +27,12 @@ SECRET_KEY = 'django-insecure-(2*qp(nj(a&@7vxd*bbfzu_0!j(z6860--l30-3&$8%5*9(426
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,20 +43,15 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'ckeditor',
     'ckeditor_uploader',
     'debug_toolbar',
-    'compressor',
     # local app
-    'pages',
+    'articles',
 ]
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
-    },
-}
+SITE_ID = 2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,7 +86,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LASExternalWebsite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -102,7 +95,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -122,7 +114,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -134,13 +125,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 
@@ -152,3 +142,96 @@ CKEDITOR_UPLOAD_PATH = 'upload/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 使用ck的工具栏并修改，宽度自适应
+CKEDITOR_CONFIGS = {
+    # django-ckeditor默认使用default配置
+    'default': {
+        # 编辑器宽度自适应
+        'width': 'auto',
+        'height': '300px',
+        # tab键转换空格数
+        'tabSpaces': 4,
+        # 工具栏风格
+        'toolbar': 'Custom',
+        # 工具栏按钮
+        'toolbar_Custom': [
+            # 预览、表情
+            ['Preview', 'Smiley'],
+            # 字体风格
+            ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Blockquote'],
+            # 字体颜色
+            ['TextColor', 'BGColor'],
+            # 格式、字体、大小
+            ['Format', 'Font', 'FontSize'],
+            # 链接
+            ['Link', 'Unlink'],
+            # 列表
+            ['Image', 'NumberedList', 'BulletedList'],
+            # 居左，居中，居右
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            # 最大化3
+            ['Maximize']
+        ],
+        # 加入代码块插件
+        'extraPlugins': ','.join(['codesnippet', 'image2', 'filebrowser', 'widget', 'lineutils']),
+    },
+    # 评论
+    'comment': {
+        # 编辑器宽度自适应
+        'width': 'auto',
+        'height': '140px',
+        # tab键转换空格数
+        'tabSpaces': 4,
+        # 工具栏风格
+        'toolbar': 'Custom',
+        # 工具栏按钮
+        'toolbar_Custom': [
+            # 表情 代码块
+            ['Smiley', 'CodeSnippet'],
+            # 字体风格
+            ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Blockquote'],
+            # 字体颜色
+            ['TextColor', 'BGColor'],
+            # 链接
+            ['Link', 'Unlink'],
+            # 列表
+            ['NumberedList', 'BulletedList'],
+        ],
+        # 加入代码块插件
+        'extraPlugins': ','.join(['codesnippet']),
+    }
+}
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+}
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_USERNAME_REQUIRED = True
+
+# client id = 612350198237-ak79ru3u38pjgq1fetp6gccbl0m3tq2j.apps.googleusercontent.com
+# client secret = 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

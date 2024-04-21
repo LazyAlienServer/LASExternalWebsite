@@ -5,6 +5,9 @@
     <title>Home Page</title>
 </head>
 <body>
-Welcome to Minecraft redstone technology document hub!
+    <p>Welcome to Minecraft Redstone Document Hub!</p>
+    {% load socialaccount %}
+    <a href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
+
 </body>
 </html>
