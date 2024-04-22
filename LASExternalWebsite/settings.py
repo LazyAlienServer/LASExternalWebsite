@@ -47,9 +47,15 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'debug_toolbar',
+    'bootstrap3',
     # local app
     'articles',
+    'users',
 ]
+
+BOOTSTRAP3 = {
+    'include_jquery': True,
+}
 
 SITE_ID = 2
 

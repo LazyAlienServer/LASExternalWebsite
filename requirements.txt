@@ -8,8 +8,8 @@ defusedxml==0.7.1
 Django==5.0.4
 django-allauth==0.61.1
 django-appconf==1.0.6
+django-bootstrap3==24.2
 django-ckeditor==6.7.1
-django-crispy-forms==2.1
 django-debug-toolbar==4.3.0
 django-js-asset==2.2.0
 idna==3.6
