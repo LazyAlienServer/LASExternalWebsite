@@ -21,7 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # 3rd party app urls
     path('accounts/', include('allauth.urls')),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
     # local app urls
     path('', include('articles.urls')),
     path('', include('users.urls')),
