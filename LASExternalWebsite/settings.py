@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env
 import os
 
 import debug_toolbar
+
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(2*qp(nj(a&@7vxd*bbfzu_0!j(z6860--l30-3&$8%5*9(426'
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mrdh.fly.dev']
+
+CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']
 
 # Application definition
 
@@ -46,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'debug_toolbar',
     'bootstrap3',
+    'whitenoise.runserver_nostatic',
     # local app
     'articles',
     'users',
@@ -67,6 +74,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'LASExternalWebsite.urls'
@@ -94,10 +102,7 @@ WSGI_APPLICATION = 'LASExternalWebsite.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.dj_db_url('DATABASE_URL', default="sqlite:///db.sqlite3"),
 }
 
 # Password validation
@@ -174,3 +179,12 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_USERNAME_REQUIRED = True
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
