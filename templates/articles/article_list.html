@@ -2,23 +2,22 @@
 
 <head>
     <title>Articles</title>
-    .card {
-        
-    }
+    <style>
+
+    </style>
 </head>
 <body>
 {% block content %}
-{% for articles in article_list %}
-    <div>
-        <div>
-            <span>
-                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-            </span>&middot
-            <span>
-                {{ article.created_at }}
-            </span>
-        </div>
+    <p class="welcome">Click the title to download a PDF file :)</p>
+{% for article in article_list %}
+
+    <div class="card">
+        <ul class="text">
+            <li>Title: <a class="text" href="{{ article.get_absolute_url }}download">{{ article.title }}</a></li>
+            <li>Created at: {{ article.created_at }}</li>
+        </ul>
     </div>
+
 {% endfor %}
 {% endblock content %}
 </body>

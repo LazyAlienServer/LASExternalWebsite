@@ -1,5 +1,11 @@
 from django.contrib import admin
 
+from articles.forms import ArticleForm
 from articles.models import Article
 
-admin.site.register(Article)
+
+class ArticleAdmin(admin.ModelAdmin):
+    form = ArticleForm
+
+
+admin.site.register(Article, ArticleAdmin)

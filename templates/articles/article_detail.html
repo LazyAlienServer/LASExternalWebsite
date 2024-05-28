@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    {% block header %}
+    <title>Article Detail--{{ article.title }}</title>
+    <style>
+
+    </style>
+    {% endblock header %}
 </head>
 <body>
-
+    {% block content %}
+    <iframe src="../../media/articles/Untitleddocument.html" width="600" height="400"></iframe>
+    {% endblock content %}
 </body>
-</html>

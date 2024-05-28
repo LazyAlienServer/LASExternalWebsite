@@ -1,6 +1,4 @@
 from django import forms
-from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
 
 from .models import Article, Comment
 
@@ -10,16 +8,15 @@ class ArticleForm(forms.ModelForm):
 
     class Meta:
         model = Article
-        fields = ['content', ]
+        fields = '__all__'
 
-    def clean_content(self):
-        file = self.cleaned_data.get('content')
-        if file.name.endswith('.pdf'):
-            raise ValidationError(
-                _('Please select a PDF file'),
-                code='invalid_file_type',
-            )
-        return file
+    # def save(self, commit=True):
+    #     instance = super(ArticleForm, self).save(commit=False)
+    #     upload_file = self.cleaned_data['content']
+    #     html = PyDocX.to_html(upload_file)
+    #     instance.content = html
+    #     instance.save()
+    #     return instance
 
 
 class CommentForm(forms.ModelForm):
