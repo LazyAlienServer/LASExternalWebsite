@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     # 3rd party app
     'allauth',
@@ -52,7 +53,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'debug_toolbar',
     'bootstrap3',
-    'whitenoise.runserver_nostatic',
     # local app
     'articles',
     'users',
