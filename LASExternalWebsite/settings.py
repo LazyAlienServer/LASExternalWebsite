@@ -13,27 +13,21 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from environs import Env
 import os
-
 import debug_toolbar
 
 env = Env()
 env.read_env()
 
+CURRENT_ENV = env.str('ENVIRONMENT', 'production')
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DJANGO_DEBUG', default=True)
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mrdh.fly.dev']
-
-CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']
 
 # Application definition
 
@@ -62,7 +56,6 @@ BOOTSTRAP3 = {
     'include_jquery': True,
 }
 
-SITE_ID = 2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -188,3 +181,8 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+if CURRENT_ENV == 'development':
+    from .dev_settings import *
+elif CURRENT_ENV == 'production':
+    from .pro_settings import *

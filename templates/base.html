@@ -1,4 +1,5 @@
 {% load bootstrap3 %}
+{% load static %}
 
 
 <!DOCTYPE html>
@@ -11,8 +12,13 @@
   
    {% bootstrap_css %}
    {% bootstrap_javascript %}
-  
+    
    <style>
+       @font-face {  
+           font-family: "Alibaba PuHuiTi 2.0";
+           src: url("{% static 'fonts/AlibabaPuHuiTi-2-75-SemiBold.woff2' %}") format("woff2");
+       }
+       
        .navbar-default .navbar-brand {
            font-family: "Alibaba PuHuiTi 2.0", sans-serif;
            opacity: 1;

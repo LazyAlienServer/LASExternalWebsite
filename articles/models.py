@@ -24,15 +24,6 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse('articles:article_detail', kwargs={'pk': self.pk})
 
-    def get_file_path(self):
-        dir_name = os.path.dirname(self.content.path)
-        basename, file_ext = os.path.splitext(os.path.basename(self.content.name))
-        basename = basename.replace(" ", "")
-        html_filename = f"{basename}.html"
-        new_file_path = os.path.join(dir_name, html_filename)
-        relative_path = os.path.relpath(new_file_path, settings.MEDIA_ROOT)
-        return os.path.join(settings.MEDIA_URL, relative_path)
-
 
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)

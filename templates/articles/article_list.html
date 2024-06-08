@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load tz %}
 
 <head>
     <title>Articles</title>
@@ -8,13 +9,14 @@
 </head>
 <body>
 {% block content %}
-    <p class="welcome">Click the title to download a PDF file :)</p>
+    <p class="welcome">Click the download button to download a PDF file :)</p>
 {% for article in article_list %}
 
     <div class="card">
         <ul class="text">
-            <li>Title: <a class="text" href="{{ article.get_absolute_url }}download">{{ article.title }}</a></li>
-            <li>Created at: {{ article.created_at }}</li>
+            <li>Title: <a class="text" href="/media/articles/{{ article.pdf_file.name }}" target="_blank">{{ article.title }}</a></li>
+            <li>Created at: {{ article.created_at|localtime }}</li>
+            <li><a class="text" href="{{ article.get_absolute_url }}download">Download</a></li>
         </ul>
     </div>
 
