@@ -3,13 +3,10 @@
 <head>
     {% block header %}
     <title>Article Detail--{{ article.title }}</title>
-    <style>
-
-    </style>
     {% endblock header %}
 </head>
 <body>
     {% block content %}
-    <iframe src="../../media/articles/Untitleddocument.html" width="600" height="400"></iframe>
+    {{ article.content | safe }}
     {% endblock content %}
 </body>

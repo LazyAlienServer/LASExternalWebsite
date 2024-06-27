@@ -4,4 +4,4 @@ CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']
 
 SITE_ID = 2
 
-DEBUG = True
+DEBUG = False

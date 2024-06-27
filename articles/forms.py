@@ -2,21 +2,26 @@ from django import forms
 
 from .models import Article, Comment
 
+from django_ckeditor_5.widgets import CKEditor5Widget
+
 
 class ArticleForm(forms.ModelForm):
-    content = forms.FileField(widget=forms.ClearableFileInput())
-
     class Meta:
         model = Article
-        fields = '__all__'
-
-    # def save(self, commit=True):
-    #     instance = super(ArticleForm, self).save(commit=False)
-    #     upload_file = self.cleaned_data['content']
-    #     html = PyDocX.to_html(upload_file)
-    #     instance.content = html
-    #     instance.save()
-    #     return instance
+        fields = (
+            'title',
+            'slug',
+            'author',
+            'content',
+            'pdf_file',
+            'original_author_url',
+            'original_article_url',
+        )
+        widgets = {
+            'content': CKEditor5Widget(
+                attrs={"class": "django_ckeditor_5"}, config_name="extends"
+            )
+        }
 
 
 class CommentForm(forms.ModelForm):

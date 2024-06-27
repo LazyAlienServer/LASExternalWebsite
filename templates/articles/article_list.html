@@ -9,14 +9,13 @@
 </head>
 <body>
 {% block content %}
-    <p class="welcome">Click the download button to download a PDF file :)</p>
 {% for article in article_list %}
 
     <div class="card">
         <ul class="text">
-            <li>Title: <a class="text" href="/media/articles/{{ article.pdf_file.name }}" target="_blank">{{ article.title }}</a></li>
-            <li>Created at: {{ article.created_at|localtime }}</li>
-            <li><a class="text" href="{{ article.get_absolute_url }}download">Download</a></li>
+            <li>Title: <a class="text" href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
+            <li>Created at: {{ article.created_at }}</li>
+            <li><a class="text" href="{{ article.get_absolute_url }}download">Article Download</a></li>
         </ul>
     </div>
 

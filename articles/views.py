@@ -1,17 +1,9 @@
 from django.views.generic import (
-    TemplateView, ListView, DetailView
-)
-from django.views.generic.edit import (
-    CreateView, UpdateView, DeleteView
+    ListView, DetailView
 )
 from django.http import FileResponse, Http404
 from rest_framework.views import APIView
-from .models import Article, Comment
-from .forms import ArticleForm, CommentForm
-
-
-class HomePageView(TemplateView):
-    template_name = 'articles/home.html'
+from .models import Article
 
 
 class ArticleListView(ListView):
@@ -23,15 +15,9 @@ class ArticleDetailView(DetailView):
     model = Article
     template_name = 'articles/article_detail.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        article = self.get_object()
-        context['file_path'] = article.get_file_path()
-        return context
-
 
 class ArticleDownloadView(APIView):
-    def get(self, request, pk, format=None):
+    def get(self, request, pk):
         try:
             article = Article.objects.get(pk=pk)
             file_path = article.pdf_file.path

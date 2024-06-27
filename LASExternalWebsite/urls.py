@@ -23,7 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # 3rd party app urls
     path('accounts/', include('allauth.urls')),
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
     # local app urls
     path('', include('articles.urls')),
     path('', include('users.urls')),
+    path('', include('pages.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

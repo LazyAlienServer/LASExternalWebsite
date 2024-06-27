@@ -16,7 +16,7 @@
    <style>
        @font-face {  
            font-family: "Alibaba PuHuiTi 2.0";
-           src: url("{% static 'fonts/AlibabaPuHuiTi-2-75-SemiBold.woff2' %}") format("woff2");
+           src: url("{% static 'AlibabaPuHuiTi-2-75-SemiBold-subset.woff2' %}") format("woff2");
        }
        
        .navbar-default .navbar-brand {
@@ -83,7 +83,7 @@
            <div class="navbar-header">
                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                </button>
-               <a class="navbar-brand" href="{% url 'articles:home' %}">
+               <a class="navbar-brand" href="{% url 'pages:home' %}">
                    MRDH
                </a>
            </div>
