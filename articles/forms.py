@@ -1,8 +1,8 @@
 from django import forms
 
-from .models import Article, Comment
-
 from django_ckeditor_5.widgets import CKEditor5Widget
+
+from .models import Article, Comment
 
 
 class ArticleForm(forms.ModelForm):

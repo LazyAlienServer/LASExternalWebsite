@@ -1,24 +1,22 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+
 from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Article(models.Model):
-    class Status(models.TextChoices):
-        DRAFT = 'DF', 'Draft'
-        PUBLISHED = 'PB', 'Published'
-    title = models.CharField(max_length=255, default="df_title")
-    author = models.CharField(max_length=255, default="df_author")
-    slug = models.SlugField(max_length=255, unique=True)
+    title = models.CharField(max_length=255, db_default="df_title")
+    author = models.CharField(max_length=255, db_default="df_author")
+    slug = models.SlugField(max_length=255, unique_for_date='created_at')
     publisher = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     content = CKEditor5Field(config_name='extends')
-    pdf_file = models.FileField(upload_to='articles/', default='df_pdf')
+    pdf_file = models.FileField(upload_to='articles/', db_default='df_pdf')
     original_author_url = models.URLField()
     original_article_url = models.URLField()
-    status = models.CharField(choices=Status, default=Status.DRAFT, max_length=2)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
 
     class Meta:
         ordering = ['-created_at']
@@ -35,7 +33,15 @@ class Article(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('articles:article_detail', kwargs={'pk': self.pk})
+        return reverse(
+            'articles:article_detail',
+            kwargs={
+                'year': self.created_at.year,
+                'month': self.created_at.month,
+                'day': self.created_at.day,
+                'slug': self.slug,
+            }
+        )
 
 
 class Comment(models.Model):

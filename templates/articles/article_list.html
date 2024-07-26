@@ -1,24 +1,23 @@
-{% extends 'base.html' %}
-{% load tz %}
+py{% extends 'base.html' %}
 
 <head>
     <title>Articles</title>
-    <style>
-
-    </style>
 </head>
 <body>
 {% block content %}
-{% for article in article_list %}
+    {% for article in page_obj %}
 
-    <div class="card">
-        <ul class="text">
-            <li>Title: <a class="text" href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
-            <li>Created at: {{ article.created_at }}</li>
-            <li><a class="text" href="{{ article.get_absolute_url }}download">Article Download</a></li>
-        </ul>
-    </div>
+        <div class="article-card">
+            <ul class="article-card-text">
+                <li>
+                    Title: <a href="{{ article.get_absolute_url }}">{{ article.title}}</a>
+                </li>
+                <li>Created at: {{ article.created_at }}</li>
+                <li><a class="text" href="{{ article.get_absolute_url }}download">Article Download</a></li>
+            </ul>
+        </div>
 
-{% endfor %}
+    {% endfor %}
+    {% include 'utils/pagination/pagination.html' %}
 {% endblock content %}
-</body>
+

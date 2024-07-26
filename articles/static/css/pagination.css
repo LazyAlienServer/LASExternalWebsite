@@ -1,0 +1,11 @@
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+}
+.step-links {
+    font-family: "Alibaba PuHuiTi 2.0", sans-serif;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.8);
+}

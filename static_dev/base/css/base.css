@@ -1,0 +1,66 @@
+body {
+    opacity: 1;
+    background: rgba(26, 26, 26);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+}
+.navbar {
+    display: flex;
+    background:rgba(26, 26, 26);
+    opacity: 1;
+    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.25);
+    border: rgba(56, 56, 56, 1);
+    order: 0;
+}
+.nav-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+}
+.nav-img-container {
+    order: 0;
+    padding-left: 40px;
+}
+.nav-items-container {
+    order: 1;
+    padding-right: 50px;
+}
+.nav-items {
+    display: inline-block;
+    padding: 0;
+}
+.nav-item {
+    display: inline-block;
+    font-family: "Alibaba PuHuiTi 2.0", sans-serif;
+    font-size: 18px;
+    margin-left: 50px;
+}
+a:link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+}
+a:visited {
+    color: rgba(255, 255, 255, 0.8);
+}
+a:hover {
+    color: blueviolet;
+    text-decoration: underline;
+}
+.hello {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    margin: 0;
+}
+.content {
+    order: 1;
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    align-items: stretch;
+}

@@ -7,7 +7,7 @@ from articles.models import Article
 class ArticleAdmin(admin.ModelAdmin):
     form = ArticleForm
     list_display = ('title', 'author',)
-    list_filter = ('status', 'created_at', 'updated_at', 'author',)
+    list_filter = ('created_at', 'updated_at', 'author',)
     search_fields = ('title', 'author')
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'created_at'

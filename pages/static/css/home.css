@@ -1,0 +1,19 @@
+.welcome {
+    font-family: "Alibaba PuHuiTi 2.0", sans-serif;
+    font-size: 35px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: rgba(255, 255, 255, 0.8);
+    padding: 15px 30px;
+    border-radius: 30px;
+    color: rgba(26, 26, 26);
+}
+.about {
+    font-size: 30px;
+    font-family: "Alibaba PuHuiTi 2.0", sans-serif;
+    color: rgba(255, 255, 255, 0.8);
+}
+.about-title {
+    font-size: 35px;
+    font-family: "Alibaba PuHuiTi 2.0", sans-serif;
+    color: rgba(255, 255, 255, 0.8);
+}

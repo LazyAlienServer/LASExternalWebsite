@@ -1,118 +1,55 @@
-{% load bootstrap3 %}
+<!DOCTYPE html>
 {% load static %}
 
-
-<!DOCTYPE html>
 <html lang="en">
 
-
-<head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-   {% bootstrap_css %}
-   {% bootstrap_javascript %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="{% static 'base/css/base.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/article_card.css' %}">
+   
+        <style>
+            @font-face {
+                font-family: "Alibaba PuHuiTi 2.0";
+                src: url("{% static 'fonts/AlibabaPuHuiTi-2-75-SemiBold-subset.woff2' %}") format("woff2");
+            }
+        </style>
     
-   <style>
-       @font-face {  
-           font-family: "Alibaba PuHuiTi 2.0";
-           src: url("{% static 'AlibabaPuHuiTi-2-75-SemiBold-subset.woff2' %}") format("woff2");
-       }
-       
-       .navbar-default .navbar-brand {
-           font-family: "Alibaba PuHuiTi 2.0", sans-serif;
-           opacity: 1;
-           font-size: 24px;
-           color: rgba(255, 255, 255, 0.8);
-       }
-       .navbar-nav li a {
-           margin-top: 1px;
-           font-family: "Alibaba PuHuiTi 2.0", sans-serif;
-           font-size: 20px;
-           color: rgba(255, 255, 255, 0.8)!important;
-       }
-       .welcome {
-           font-size: 30px;
-           font-family: "Alibaba PuHuiTi 2.0", sans-serif;
-           color: rgba(255, 255, 255, 0.8);
-       }
-       .welcome-title {
-           font-size: 35px;
-           font-family: "Alibaba PuHuiTi 2.0", sans-serif;
-           color: rgba(255, 255, 255, 0.8);
-       }
-       .jumbotron {
-           font-family: "Alibaba PuHuiTi 2.0", sans-serif;
-           background-color: rgba(255, 255, 255, 0.8);
-           box-shadow: rgba(255, 255, 255, 0.8)!important;
-       }
-       body {
-           opacity: 1;
-           background: rgba(26, 26, 26);
-       }
-       .page-header {
-           border-bottom: none;
-       }
-       .navbar {
-           opacity: 1;
-           background: rgba(26, 26, 26);
-           box-shadow: 0 10px 8px  rgba(0, 0, 0, 0.25);
-           border: rgba(56, 56, 56, 1);
-       }
-       .link {
-           font-family: "Alibaba PuHuiTi 2.0", sans-serif;
-           font-size: 30px;
-       }
-       .card {
-           margin: 20px;
-           padding: 17px 10px 10px 10px;
-           font-family: "Alibaba PuHuiTi 2.0", sans-serif;
-           font-size: 20px;
-           border: 1px solid rgba(255, 255, 255, 0.8);
-       }
-       .text {
-           color: rgba(255, 255, 255, 0.8);
-       }
-       .container {
-       }
-   </style>
-</head>
-<body>
-   <nav class="navbar navbar-default navbar-static-top">
-       <div class="container">
-           <div class="navbar-header">
-               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-               </button>
-               <a class="navbar-brand" href="{% url 'pages:home' %}">
-                   MRDH
-               </a>
-           </div>
-       
-           <div id="navbar" class="navbar-collapse collapse">
-               <ul class="nav navbar-nav navbar-right">
-                   {% if user.is_authenticated %}
-                       <li><a class="link" href="{% url 'articles:articles' %}">Articles</a></li>
-                       <li><a>Hello, {{ user.username }}!</a></li>
-                       <li><a href="{% url 'users:logout' %}">Log Out</a></li>
-                   {% else %}
-                       {% load socialaccount %}
-                       <li><a href="{% provider_login_url 'google' %}?next=/">Login With Google</a></li>
-                   {% endif %}
-               </ul>
-           </div>
-       </div>
-   </nav>
-   <div class="container">
-       <div class="page-header">
-           {% block header %}
-           {% endblock header %}
-       </div>
-       <div>
-           {% block content %}
-           {% endblock content %}
-       </div>
-   </div>
+    </head>
+    
+    <body>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-img-container">
+                    <a href="{% url 'pages:home' %}">
+                        <div style="background: url('{% static 'base/img/navbar header.png' %}'); width: 72px; height: 52px; background-size: 100% 100%"></div>
+                    </a>
+                </div>
+        
+                <div class="nav-items-container">
+                    <ul class="nav-items">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><p class="hello">Hello, {{ user.username }}! >></p></li>
+                            <li class="nav-item"><a href="{% url 'users:profile' %}">Profile</a></li>
+                            <li class="nav-item"><a href="{% url 'articles:articles' %}">Articles</a></li>
+                        {% else %}
+                            {% load socialaccount %}
+                            <li class="nav-item"><a href="{% provider_login_url 'google' %}?next=/">Login With Google</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <div>
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+    
+    </body>
 
-
-</body>
 </html>

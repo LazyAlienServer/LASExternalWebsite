@@ -1,31 +1,36 @@
-{% extends 'base.html' %}
 <!DOCTYPE html>
-
+{% extends 'base.html' %}
+{% load static %}
 
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <title>Home Page</title>
-</head>
 
+    <head>
+        <meta charset="UTF-8">
+        <title>Home Page</title>
+    </head>
 
-<body>
-{% block header %}
-   <div class="jumbotron">
-       <h1>Welcome to Minecraft Redstone Document Hub!</h1>
-   </div>
-{% endblock header %}
+    <body>
 
+        {% block content %}
+            <div class="welcome">
+                <h1>Welcome to Minecraft Redstone Document Hub!</h1>
+            </div>
+            
+            <p class="about">This website hosts all the documents we have translated.</p>
+            
+            <div style="height: 50px;"></div> 
+            
+            <p class="about-title">Coming Soon:</p>
+            <p class="about">Search bar</p>
+            <p class="about">Comment</p>
+            
+            <div style="height: 50px;"></div>
+            
+            <p class="about-title">About us:</p>
+            <p class="about">LAS Translation Team</p>
 
-{% block content %}
-    
-    <p class="welcome">This website hosts all the documents we have translated.</p>
-    <a class="link" href="{% url 'articles:articles' %}">Articles</a>
-    <div style="height: 50px;"></div> 
-    <p class="welcome-title">Coming Soon:</p>
-    <p class="welcome">Search bar</p>
-    <p class="welcome">Comment</p>
+        {% endblock content %}
 
-{% endblock content %}
-</body>
+    </body>
+
 </html>
